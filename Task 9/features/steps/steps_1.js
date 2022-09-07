@@ -1,6 +1,6 @@
 require("chromedriver");
 const assert = require('assert');
-const { Given, When, Then, Before, After, DataTable } = require('@cucumber/cucumber');
+const { Given, When, Then, Before, After } = require('@cucumber/cucumber');
 const { Capabilities, Builder, By, Key, until } = require('selenium-webdriver');
 let chromeCapabilities = Capabilities.chrome();
 const { setDefaultTimeout } = require('@cucumber/cucumber');
@@ -22,24 +22,24 @@ Given('I visit Kashkick login website', async function () {
 
 
 When('I click on Header Logo', async function () {
-  await driver.findElement(By.className("icon icon-logo")).click();
+  await driver.findElement(By.className("navbar-brand logo-link")).click();
 });
 
 Then('I should be returned to Kashkick main page', async function () {
   let titleText = await driver.findElement(By.xpath('//*[(contains(text(), "Greatest Reward"))]')).getText();
-        assert.equal('Cash is the Greatest Reward!', titleText)
+  assert.equal('Cash is the Greatest Reward!', titleText)
 });
 
 
 
 
 When('I click on Footer Logo', async function () {
-  await driver.findElement(By.css('a[href="https://www.kashkick.com"]')).click()
+  await driver.findElement(By.css('a[href="https://kashkick.com"]')).click()
 });
 
 Then('I should be returned to Kashkick main page2', async function () {
-    let currentUrl = await driver.getCurrentUrl()
-    assert.equal('https://www.kashkick.com/', currentUrl)
+  let currentUrl = await driver.getCurrentUrl()
+  assert.equal('https://kashkick.com/', currentUrl)
 });
 
 
@@ -125,6 +125,7 @@ Then('I see the Forgot password placeholder text - Enter your Email', async func
 
 
 
+
 When('I enter <email> as {string}', async function (string) {
   await driver.findElement(By.name("Email")).sendKeys(string);
 });
@@ -139,7 +140,7 @@ When('I click on Sign In button', async function () {
 
 Then('I am Logged in', async function () {
   let currentUrl = await driver.getCurrentUrl()
-  assert.equal('https://www.kashkick.com/sub/offers', currentUrl)
+  assert.equal('https://kashkick.com/sub/offers', currentUrl)
 });
 
 
@@ -158,7 +159,7 @@ When('I click on Sign In button1', async function () {
 });
 
 Then('I am not Logged in', async function () {
-    let currentUrl = await driver.getCurrentUrl()
+  let currentUrl = await driver.getCurrentUrl()
   assert.notEqual('https://www.kashkick.com/sub/offers', currentUrl)
 });
 
@@ -191,33 +192,25 @@ When('I click on Sign in again', async function () {
 });
 
 Then('I am Logged in2', async function () {
-    let currentUrl = await driver.getCurrentUrl()
-    assert.equal('https://www.kashkick.com/sub/offers', currentUrl)
+  let currentUrl = await driver.getCurrentUrl()
+  assert.equal('https://kashkick.com/sub/offers', currentUrl)
 });
 
 
 
-  Given(/^I provide below information during registration$/, async function(DataTable) {
-    await driver.findElement(By.name("email")).sendKeys(email);
-    await driver.findElement(By.name("password")).sendKeys(password);
-    const expected = DataTable
-    assert.equal(DataTable.rows(), expected)
-  });
-When('I submit the details', async function () {
+
+When(/^User enters valid user credentials$/, async function (dataTable) {
+  let rows = dataTable.rowsHash();
+  let emailRow = rows.userEmail;
+  let passwordRow = rows.userPassword;
+  await driver.findElement(By.name("Email")).sendKeys(emailRow);
+  await driver.findElement(By.name("Password")).sendKeys(passwordRow);
+});
+
+When('I click on Sign in button2', async function () {
   await driver.findElement(By.name('Login')).click()
 });
-Then('I am Logged in2', async function () {
+Then('I am Logged in3', async function () {
   let currentUrl = await driver.getCurrentUrl()
-    assert.equal('https://www.kashkick.com/login.php', currentUrl)
+  assert.equal('https://kashkick.com/sub/offers', currentUrl)
 });
-
-// DataTable
-// Given(/^I provide below information during registration$/, async function (string) {
-//   let string = await driver.findElement(By.name("Email")).sendKeys(string);
-//   await driver.findElement(By.name("Password")).sendKeys(string);
-// });
-// When('I submit the details', async function () {;
-// });
-
-// Then('I am Logged in2', async function () {
-// });

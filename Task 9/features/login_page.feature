@@ -3,7 +3,7 @@ Feature: Login page test suite
   I want to cover Kashkick Login page with tests
 
   Background: Kashkick login page visit
-  Given I visit Kashkick login website
+    Given I visit Kashkick login website
 
   @test_one
   Scenario: Check if Kashkick Header logo redirects to Login page
@@ -57,7 +57,6 @@ Feature: Login page test suite
       And  I enter password <password>
       And  I click on Sign In button1
       Then I am not Logged in
-
       Examples:
           | email                 | password     |
           | a                     | 123123       |
@@ -77,22 +76,13 @@ Feature: Login page test suite
       Then I am Logged in2
 
   @test_ten
-    Scenario: Check if I can login using data tables
-      When I provide below information during registration
-       | Fields     |  Inputs                |
-       | email      | studytest@gmail.com    |
-       | password   | test123                |
-      And I submit the details
-      Then I am Logged in2
-
-      
-    Scenario: Check if I can login using data tables <email> <password>
-      Given I provide below information during registration
-            | Field | Inputs |
-            | email   | studytest@gmail.com     |
-            | password   | test123     |
-      When I submit the details
-      Then I am Logged in2
+    Scenario: Check if I can login using valid credentials
+      When User enters valid user credentials
+       | key             |  value               | 
+       | userEmail       |  test123@gmail.com   |
+       | userPassword    |  test123             |
+      And I click on Sign in button2
+      Then I am Logged in3
 
 
 
