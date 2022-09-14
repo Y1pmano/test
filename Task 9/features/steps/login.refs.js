@@ -9,11 +9,11 @@ class LoginPage extends BasePage{
         this.driver.get(theURL);
     }
 
-    async headerLogoClickOn(){
-        return await this.driver.findElement(By.className("navbar-brand logo-link")).click();
+    async clickOnHeaderLogo(){
+        return await this.driver.findElement(By.css('div[class="row"] div a svg')).click();
     }
 
-    async footerLogoClickOn(){
+    async clickOnFooterLogo(){
         await this.driver.findElement(By.css('a[href="https://kashkick.com"]')).click();
     }
 
@@ -25,78 +25,43 @@ class LoginPage extends BasePage{
        return await this.driver.getCurrentUrl();
     }
 
-    async footerLogoClickOn(){
-        return await this.driver.findElement(By.className("navbar-brand logo-link")).click();
-    }
-    
-    async forgotPsswrdBtnClickOn(){
+    async clickOnForgotPasswordButton(){
         return await this.driver.findElement(By.className('hoverLight')).click();
     }
 
-    async emailFillIn(email){
+    async fillInEmail(email){
         await this.driver.findElement(By.name("Email")).sendKeys(email);
     }
 
-    async psswrdFillIn(password){
+    async fillInPassword(password){
         await this.driver.findElement(By.name("Password")).sendKeys(password);
     }
 
-    async requestPsswrdBtnClickOn(){
+    async clickOnRequestPasswordButton(){
         await this.driver.findElement(By.className('forgot-password__btn')).click()
     }
 
-    async signInBtnClickOn(){
+    async clickOnSignInButton(){
         await this.driver.findElement(By.name('Login')).click();
     }
 
-    async getSuccessPsswrdRequestText(){
-        return await this.driver.findElement(By.xpath('//*[(contains(text(), "Please look for our"))]')).getText();
+    async getAlertText(){
+        return await this.driver.findElement(By.className('alert alert')).getText();
     }
 
-    async getAlertPsswrdRequestText(){
-        return await this.driver.findElement(By.xpath('//*[(contains(text(), "We can not find"))]')).getText();
-    }
-
-    async getAlertEmptyPsswrdRequestText(){
-        return await this.driver.findElement(By.xpath('//*[(contains(text(), "is required"))]')).getText();
-    }
     async clearEmailField(){
         await this.driver.findElement(By.name('Email')).clear();
     }
-    async clearPsswrdField(){
+    async clearPasswordField(){
         await this.driver.findElement(By.name("Password")).clear();
     }
 
-    async emptySpaceClickOn(){
+    async clickOnEmptySpace(){
         await this.driver.findElement(By.className('col-md-6 col-xl-4')).click();
     }
 
-    async getPlaceholderAttrbt(){
+    async getPlaceholderAttribute(){
         return await this.driver.findElement(By.css('[placeholder="Enter Your Email"]')).getAttribute("placeholder");
     }
-
-
-
-
-    
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
   module.exports = new LoginPage();
