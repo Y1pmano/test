@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    environment {
+
+        COMPOSE_FILE = "docker-compose.yml"
+    }
+
+    stages {
+        stage("Build and start") {
+            steps {
+                step([$class: 'DockerComposeBuilder', dockerComposeFile: './docker-compose.yml', option: [$class: 'ExecuteCommandInsideContainer', command: 'docker compose up', index: 1, privilegedMode: false, service: '', workDir: ''], useCustomDockerComposeFile: true])
+            }
+        }
+
+        post("Allure report and Turn down docker") {
+            always {
+                docker compose down
+                allure([
+                        includeProperties: false,
+                        jdk              : '',
+                        properties       : [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results          : [[path: './allure-results']]
+                ])
+                step([$class: 'DockerBuilderControl', option: [$class: 'DockerBuilderControlOptionStopAll', remove: true]])
+            }
+        }
+    }

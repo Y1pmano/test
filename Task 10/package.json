@@ -21,6 +21,7 @@
     "selenium-webdriver": "^4.4.0"
   },
   "devDependencies": {
-    "cucumberjs-parallel": "^2.0.2"
+    "cucumberjs-parallel": "^2.0.2",
+    "fs-finder": "^1.8.1"
   }
 }
