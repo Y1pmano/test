@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Preparing.'
                 sh 'rm -rf allure-results/*'
-                sh 'docker compose up -d --scale firefox=2'
+                sh 'docker compose up -d'
                 sleep 10
 
             }
