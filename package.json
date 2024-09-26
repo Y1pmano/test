@@ -1,0 +1,27 @@
+{
+  "name": "task-10",
+  "version": "1.0.0",
+  "description": "1. Firstly we have to install Node.Js. Ill explain how to do it on example of Windows. So these are the steps:     1) Go to https://nodejs.org/en/download/ and choose for what operating system we want to get Node.js, in our example it will be Windows. We should not forget that we have to know what version of OS we have, whether it is 32 or 64-bit.     2) After downloading we should install it.     3) In order to reassure that Node.Js is installed, we can check it via command \"node -v\", that can be typed in the Windows terminal. So why do we need Node.js? One of the main reasons, is that it allows us to execute and run scripts on our computer, not using a browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/cucumberjs-parallel/bin/cucumberjs-parallel ./Task 10/features -r ./Task 10/features/steps/login_webpage.spec.js -w 2 -f ./Task 10/features/Reporter.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "^7.3.2",
+    "allure-commandline": "^2.18.1",
+    "allure-cucumberjs": "^2.0.0-beta.19",
+    "allure-js-commons": "^2.0.0-beta.19",
+    "chromedriver": "^105.0.0",
+    "geckodriver": "^3.0.2",
+    "lodash": "^4.17.21",
+    "mocha": "^10.0.0",
+    "path": "^0.12.7",
+    "selenium-webdriver": "^4.4.0"
+  },
+  "devDependencies": {
+    "cucumberjs-parallel": "^2.0.2",
+    "fs-finder": "^1.8.1"
+  }
+}

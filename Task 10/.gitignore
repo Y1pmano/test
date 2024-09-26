@@ -1,0 +1,6 @@
+/node_modules
+/target/allure-results
+/allure-results
+/allure-report
+/docker-compose.yml
+
